@@ -7,6 +7,7 @@ from functools import partial
 import json
 import warnings
 
+import pandas as pd
 import numpy as np
 import sklearn
 import sklearn.preprocessing
@@ -440,7 +441,7 @@ class LimeTabularExplainer(object):
         if self.discretizer is not None:
             inverse[1:] = self.discretizer.undiscretize(inverse[1:])
         inverse[0] = data_row
-        return data, inverse
+        return data, pd.DataFrame(inverse, columns=data_row.index)
 
 
 class RecurrentTabularExplainer(LimeTabularExplainer):
